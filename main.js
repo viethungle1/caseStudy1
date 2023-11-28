@@ -5,7 +5,7 @@ const ROW = 18;
 // số hàng = 18
 const COL = 10;
 // số cột = 10
-const SQ = 40;
+const SQ = 30;
 // kích thước 1 ô =40
 const COLOR = "WHITE";
 //màu của ô là màu trắng
@@ -64,17 +64,39 @@ class Piece {
     unDraw () {
         this.fill(COLOR)
     }
+    moveDown () {
+        this.unDraw();
+        this.y++;
+        this.draw();
+    }
 }
 const PIECES = [
     [Z, "red"],
     [S, "green"],
     [T, "yellow"],
     [O, "blue"],
+    [L, "purple"],
     [I, "cyan"],
-    [J, "orange"]
+    [J, "orange"],
 ];
 
 function randomPiece() {
-    let r= Math.floor(Math.random()*PIECES.length);
-    return new Piece()
+    let r= Math.floor(Math.random() * PIECES.length);
+    return new Piece(PIECES[r][0], PIECES [r][1]);
 }
+
+let p=randomPiece();
+console.log(p);
+
+let gameOver = false;
+let interval;
+function drop () {
+    interval = setInterval(function () {
+        if (!gameOver) {
+            p.moveDown();
+        } else {
+            clearInterval(interval)
+        }
+    },500)
+}
+drop();
