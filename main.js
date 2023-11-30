@@ -38,11 +38,11 @@ function reset1 () {
 }
 // Khai báo lớp "Piece"
 class Piece {
-    constructor(tetromino, color) {
-        this.tetromino = tetromino;
+    constructor(brick, color) {
+        this.brick = brick;
         this.color = color;
-        this.tetrominoN = 0
-        this.activeTetromino = this.tetromino[this.tetrominoN]
+        this.brickN = 0
+        this.activeBrick = this.brick[this.brickN]
 
         this.x = 3;
         this.y = -2;
@@ -50,9 +50,9 @@ class Piece {
 
     // Vẽ các ô hình vuông nếu mảng trả về giá trị
     fill(color) {
-        for (let r = 0; r < this.activeTetromino.length; r++) {
-            for (let c = 0; c < this.activeTetromino.length; c++) {
-                if (this.activeTetromino [r][c]) {
+        for (let r = 0; r < this.activeBrick.length; r++) {
+            for (let c = 0; c < this.activeBrick.length; c++) {
+                if (this.activeBrick [r][c]) {
                     drawSquare(this.x + c, this.y + r, color)
                 }
             }
@@ -68,7 +68,7 @@ class Piece {
     }
 
     moveDown() {
-        if (!this.collision(0, 1, this.activeTetromino)) {
+        if (!this.collision(0, 1, this.activeBrick)) {
             this.unDraw();
             this.y++;
             this.draw();
@@ -79,7 +79,7 @@ class Piece {
     }
 
     moveLeft() {
-        if (!this.collision(-1, 0, this.activeTetromino)) {
+        if (!this.collision(-1, 0, this.activeBrick)) {
             this.unDraw();
             this.x--;
             this.draw();
@@ -87,7 +87,7 @@ class Piece {
     }
 
     moveRight() {
-        if (!this.collision(1, 0, this.activeTetromino)) {
+        if (!this.collision(1, 0, this.activeBrick)) {
             this.unDraw();
             this.x++;
             this.draw();
@@ -95,9 +95,9 @@ class Piece {
     }
 
     lock() {
-        for (let r = 0; r < this.activeTetromino.length; r++) {
-            for (let c =0; c < this.activeTetromino.length; c++) {
-                if (!this.activeTetromino[r][c]) {
+        for (let r = 0; r < this.activeBrick.length; r++) {
+            for (let c =0; c < this.activeBrick.length; c++) {
+                if (!this.activeBrick[r][c]) {
                     continue
                 }
                 if (this.y + r < 0) {
@@ -129,7 +129,7 @@ class Piece {
         document.querySelector('#score').innerText=score;
     }
     rotate () {
-        let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
+        let nextPattern = this.brick[(this.brickN + 1) % this.brick.length];
         let move = 0;
         if (this.collision(0, 0, nextPattern)) {
             if (this.x > COL / 2) {
@@ -141,8 +141,8 @@ class Piece {
         if (!this.collision(0, 0, nextPattern)) {
             this.unDraw();
             this.x += move;
-            this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-            this.activeTetromino = this.tetromino[this.tetrominoN];
+            this.brickN = (this.brickN + 1) % this.brick.length;
+            this.activeBrick = this.brick[this.brickN];
             this.draw();
         }
     }
