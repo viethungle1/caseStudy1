@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Game Tetris</title>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        body{
+            background-image: url("https://media.giphy.com/media/f7STAwvEml1eIf0FEq/giphy.gif");
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-<h1>Tetris game</h1>
+<button type="button" onclick="reset1()">Chơi lại</button>
 <div class="game">
     <div class="score-box">
-        Score : <div id="score">0</div>
+        <div id="score" style="color: #000000; font-family: 'Action Jackson'; font-size: 30px" >0</div>
     </div>
-    <canvas id="canvas" width="400" height="800"></canvas>
+    <canvas id="canvas" width="450" height="540" style="border: 5px solid salmon;" ></canvas>
 </div>
 <script src="shape.js"></script>
-<script src="main.js"></script>
+<script src="board.js"></script>
 </body>
 </html>
